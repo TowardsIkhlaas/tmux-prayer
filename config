@@ -1,0 +1,41 @@
+# Prayer Times Configuration
+# Location (use city/country OR latitude/longitude)
+city=St. John's
+country=Canada
+# latitude=47.5615
+# longitude=-52.7126
+
+# Timezone (IANA format, or "auto" to detect from system)
+timezone=auto
+
+# Calculation method (0-23, see https://aladhan.com/calculation-methods)
+# 2 = Islamic Society of North America (ISNA)
+method=2
+
+# Juristic school for Asr (0 = Shafi'i, 1 = Hanafi)
+school=0
+
+# Additional prayers to include (comma-separated)
+# Options: sunrise, imsak, midnight, lastthird
+additional_prayers=
+
+# Ramadan awareness (true/false)
+# Adds contextual labels: Suhoor End, Iftar, Taraweeh
+ramadan_aware=true
+
+# Hijri date adjustment (-2 to +2)
+hijri_adjustment=0
+
+# Show Hijri date in output (true/false)
+show_hijri=false
+
+# Display format: short (2h 15m), long (2 hours 15 minutes), minutes (135m)
+display_format=short
+
+# Behavior after Isha prayer
+# tomorrow_fajr = Show "Fajr tmrw (Xh Ym)"
+# done_icon = Show only the icon (prayers complete for today)
+after_isha=tomorrow_fajr
+
+# Icon to show when prayers are complete (used with after_isha=done_icon)
+done_icon=󱠧
