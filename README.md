@@ -2,6 +2,9 @@
 
 A tmux status bar module that displays the next Islamic prayer time with countdown. Integrates with the [catppuccin-tmux](https://github.com/catppuccin/tmux) theme.
 
+
+<img width="1016" height="694" alt="tmux-prayer" src="https://github.com/user-attachments/assets/9ead5ac0-1b5d-4d7a-bcae-106a4fa93967" />
+
 ## Features
 
 - Displays next prayer with countdown: `Dhuhr (2h 15m)`
