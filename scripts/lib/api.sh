@@ -1,7 +1,7 @@
 #!/bin/bash
 # Aladhan API client with caching
 
-CACHE_DIR="${HOME}/.config/prayer-times/cache"
+CACHE_DIR="${HOME}/.config/tmux-prayer/cache"
 API_BASE="https://api.aladhan.com/v1"
 API_TIMEOUT=5
 
@@ -104,6 +104,7 @@ get_prayer_data() {
 
     if [[ -n "$response" ]]; then
         echo "$response" > "$cache_file"
+        cleanup_cache
         echo "$response"
         return 0
     fi
@@ -156,7 +157,7 @@ get_tomorrow_prayer_data() {
     return 1
 }
 
-# Clean up old cache files (keep last 7 days)
+# Clean up old cache files (keep today + yesterday)
 cleanup_cache() {
-    find "$CACHE_DIR" -name "*.json" -mtime +7 -type f -delete 2>/dev/null
+    find "$CACHE_DIR" -name "*.json" -mtime +2 -type f -delete 2>/dev/null
 }

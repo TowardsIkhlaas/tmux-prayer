@@ -1,0 +1,35 @@
+# Minimal tmux.conf for the top status bar with prayer times
+# Copy the relevant parts into your own tmux.conf
+
+# Status bar on top
+set -g status-position top
+
+# --- Plugins (via TPM) ---
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'catppuccin/tmux'           # or your preferred fork
+
+# --- Catppuccin theme settings ---
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+
+# Status modules
+set -g @catppuccin_status_modules_right "prayer_times"
+set -g @catppuccin_status_modules_left "session"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"
+set -g @catppuccin_status_connect_separator "no"
+
+# Prayer times module
+set -g @catppuccin_prayer_times_text "#($HOME/.config/tmux-prayer/scripts/prayer.sh)"
+
+# Initialize TPM (keep this at the very bottom)
+run '~/.tmux/plugins/tpm/tpm'

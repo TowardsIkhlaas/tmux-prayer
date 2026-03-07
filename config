@@ -6,6 +6,9 @@ country=Canada
 # longitude=-52.7126
 
 # Timezone (IANA format, or "auto" to detect from system)
+# Must match your system timezone. If you travel and your system timezone
+# changes, the module shows "TZ mismatch" to avoid inaccurate countdowns.
+# Update city/country to your current location to fix this.
 timezone=auto
 
 # Calculation method (0-23, see https://aladhan.com/calculation-methods)

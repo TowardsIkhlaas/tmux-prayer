@@ -22,12 +22,15 @@ time_to_epoch_tomorrow() {
     local time_str="$1"
     local epoch
 
-    # macOS/BSD date: get today's epoch then add 24 hours
-    epoch=$(date -j -f "%H:%M" "$time_str" +%s 2>/dev/null)
-    if [[ -n "$epoch" ]]; then
-        epoch=$((epoch + 86400))
-        echo "$epoch"
-        return
+    # macOS/BSD date: get tomorrow's date then parse with time
+    local tomorrow_date
+    tomorrow_date=$(date -v+1d +"%Y-%m-%d" 2>/dev/null)
+    if [[ -n "$tomorrow_date" ]]; then
+        epoch=$(date -j -f "%Y-%m-%d %H:%M" "$tomorrow_date $time_str" +%s 2>/dev/null)
+        if [[ -n "$epoch" ]]; then
+            echo "$epoch"
+            return
+        fi
     fi
 
     # GNU date fallback
@@ -146,7 +149,8 @@ find_next_prayer() {
         local epoch
         epoch=$(time_to_epoch "$time")
 
-        # Skip if time has passed
+        # Skip if epoch is empty (failed to parse) or time has passed
+        [[ -z "$epoch" ]] && continue
         [[ $epoch -le $now ]] && continue
 
         # First upcoming prayer, or earlier than current next

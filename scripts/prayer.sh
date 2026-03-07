@@ -2,8 +2,6 @@
 # Main prayer-times script for tmux status bar
 # Called via tmux #() command
 
-set -euo pipefail
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LIB_DIR="${SCRIPT_DIR}/lib"
 
@@ -14,9 +12,20 @@ source "${LIB_DIR}/time_utils.sh"
 source "${LIB_DIR}/ramadan.sh"
 source "${LIB_DIR}/display.sh"
 
+# Ensure we always output something (tmux shows blank on silent failure)
+trap 'echo "..."' ERR
+
 main() {
     # Load configuration
     load_config
+
+    # Validate timezone matches system (avoid inaccurate countdowns when traveling)
+    local system_tz
+    system_tz=$(detect_timezone)
+    if [[ -n "$PT_TIMEZONE" && -n "$system_tz" && "$PT_TIMEZONE" != "$system_tz" ]]; then
+        echo "TZ mismatch"
+        return
+    fi
 
     # Get prayer data (from cache or API)
     local prayer_data
@@ -99,10 +108,6 @@ main() {
         esac
     fi
 
-    # Cleanup old cache files (run occasionally)
-    if [[ $((RANDOM % 100)) -eq 0 ]]; then
-        cleanup_cache
-    fi
 }
 
 main

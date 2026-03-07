@@ -1,7 +1,7 @@
 #!/bin/bash
-# Config parser for prayer-times module
+# Config parser for tmux-prayer module
 
-CONFIG_FILE="${HOME}/.config/prayer-times/config"
+CONFIG_FILE="${HOME}/.config/tmux-prayer/config"
 
 # Uppercase conversion (compatible with bash 3.2)
 to_upper() {
